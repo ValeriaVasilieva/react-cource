@@ -72,13 +72,13 @@ const Chat: FC<Props> = ({ botInfo }) => {
       messages[messages.length - 1].author === AUTHORS.author
     ) {
       setIsLoading(true)
+      gridRef.current && gridRef.current.scrollIntoView(false)
       setTimeout(() => {
         setMessage((prev) => [
           ...prev,
           { author: botInfo.author, text: botInfo.text },
         ])
-        gridRef.current &&
-          gridRef.current.scrollIntoView({ block: "end", inline: "nearest" })
+        gridRef.current && gridRef.current.scrollIntoView(false)
         setIsLoading(false)
       }, 1500)
     }
@@ -88,11 +88,12 @@ const Chat: FC<Props> = ({ botInfo }) => {
     e.preventDefault()
     if (value) {
       setMessage((prev) => [...prev, { author: AUTHORS.author, text: value }])
-      gridRef.current &&
-        gridRef.current.scrollIntoView({ block: "end", inline: "nearest" })
+      gridRef.current && gridRef.current.scrollIntoView(false)
     }
     setValue("")
   }
+
+  console.log(gridRef)
 
   return (
     <Grid xs={6} className={classes.chatWindow} flexDirection="column">
@@ -103,10 +104,9 @@ const Chat: FC<Props> = ({ botInfo }) => {
         alignContent="flex-start"
         className={classes.messages}
         overflow="auto"
-        ref={gridRef}
       >
         {messages.map((message) => (
-          <Grid container>
+          <Grid container ref={gridRef}>
             <Grid item xs={2} spacing={4}>
               <Chip
                 className={
@@ -131,12 +131,11 @@ const Chat: FC<Props> = ({ botInfo }) => {
             </Grid>
           </Grid>
         ))}
-        {isLoading && (
-          <Typography className={classes.botTyping}>
-            Bot is typing...
-          </Typography>
-        )}
       </Grid>
+
+      {isLoading && (
+        <Typography className={classes.botTyping}>Bot is typing...</Typography>
+      )}
 
       <form onSubmit={handlerSubmit}>
         <Grid
