@@ -59,6 +59,7 @@ const Chat: FC<Props> = ({ botInfo }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const gridRef = useRef<null | HTMLDivElement>(null)
+  const inputRef = useRef<null | HTMLInputElement>(null)
 
   useEffect(() => {
     if (
@@ -78,6 +79,7 @@ const Chat: FC<Props> = ({ botInfo }) => {
           },
         ])
         gridRef.current && gridRef.current.scrollIntoView(false)
+        inputRef.current?.focus()
         setIsLoading(false)
       }, 1500)
     }
@@ -87,6 +89,7 @@ const Chat: FC<Props> = ({ botInfo }) => {
     if (messages.length) {
       setMessage([])
     }
+    inputRef.current?.focus()
   }, [botInfo])
 
   const handlerSubmit = (e: React.FormEvent) => {
@@ -153,6 +156,7 @@ const Chat: FC<Props> = ({ botInfo }) => {
               fullWidth
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              inputRef={inputRef}
             ></TextField>
           </Grid>
           <Grid item xs={2}>
