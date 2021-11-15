@@ -1,4 +1,4 @@
-export const AUTHORS: Authors = {
+export const AUTHORS = {
   bots: {
     angryBot: "Jake",
     sadBot: "Saddy",
@@ -9,14 +9,4 @@ export const AUTHORS: Authors = {
   author: "You",
 }
 
-export type Authors = {
-  bots: { [key in Bots]: string }
-  author: "You"
-}
-
-export type Bots =
-  | "angryBot"
-  | "sadBot"
-  | "romanticBot"
-  | "interestedBot"
-  | "psihologicBot"
+export type Bots = keyof typeof AUTHORS.bots

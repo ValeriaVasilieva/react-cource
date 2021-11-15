@@ -28,15 +28,16 @@ const useStyles = makeStyles({
     padding: "3px 10px",
   },
   messages: {
-    height: "90%",
+    height: "70%",
   },
   botTyping: {
     color: blue[900],
+    marginBottom: "-20px",
   },
   chatWindow: {
     position: "relative",
     backgroundColor: "rgb(255, 255, 255, 25%)",
-    padding: "15px 15px 50px 15px",
+    padding: "15px 15px 80px 15px",
     borderRadius: "15px",
     height: "80vh",
   },
@@ -92,7 +93,7 @@ const Chat: FC<Props> = ({ botInfo }) => {
     inputRef.current?.focus()
   }, [botInfo])
 
-  const handlerSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (value) {
       setMessage((prev) => [...prev, { author: AUTHORS.author, text: value }])
@@ -102,7 +103,7 @@ const Chat: FC<Props> = ({ botInfo }) => {
   }
 
   return (
-    <Grid className={classes.chatWindow} flexDirection="column">
+    <Grid container className={classes.chatWindow} flexDirection="column">
       <Grid
         container
         flexGrow={1}
@@ -142,7 +143,7 @@ const Chat: FC<Props> = ({ botInfo }) => {
         <Typography className={classes.botTyping}>Bot is typing...</Typography>
       )}
 
-      <form onSubmit={handlerSubmit}>
+      <form onSubmit={handleSubmit}>
         <Grid
           container
           spacing={4}
