@@ -50,6 +50,7 @@ const Header: FC = () => {
             className={({ isActive }) =>
               isActive ? classes.linkActive : classes.link
             }
+            key={link.path}
           >
             {link.label}
           </NavLink>
