@@ -1,0 +1,10 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    45deg,
+    rgb(140, 192, 191),
+    rgb(236, 237, 237) 90%
+  );
+  overflow: hidden;
+}
